@@ -16,7 +16,7 @@ const Footer = () => {
             Built with <span className="font-semibold">React</span>, <span className="font-semibold">TypeScript</span>, <span className="font-semibold">Redux Toolkit</span>, and <span className="font-semibold">Tailwind CSS</span>.
           </div>
           <div>
-            <span className="font-semibold">Contact:</span> <a href="mailto:your@email.com" className="underline hover:text-yellow-300">your@email.com</a>
+            <span className="font-semibold">Contact:</span> <a href="mailto:your@email.com" className="underline hover:text-yellow-300">mostaryjahan01@email.com</a>
           </div>
         </div>
         {/* Right: Socials */}
