@@ -243,7 +243,7 @@ const AddBook = () => {
               )}
               {isError && (
                 <div className="text-red-600 mt-2">
-                  Failed to add book. {(error as any)?.data?.message || ""}
+                  Failed to add book. {("data" in (error as { data?: { message?: string } }) ? (error as { data?: { message?: string } }).data?.message : "") || ""}
                 </div>
               )}
             </div>
