@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { BookOpen, Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -29,7 +29,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-yellow-400 relative pb-1"
-              : "text-black hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
+              : "text-primary hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
           }
         >
           All Books
@@ -42,7 +42,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-yellow-400 relative pb-1"
-              : "text-black hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
+              : "text-primary hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
           }
         >
           Add Book
@@ -55,7 +55,7 @@ const Navbar = () => {
           className={({ isActive }) =>
             isActive
               ? "text-yellow-400 relative pb-1"
-              : "text-black hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
+              : "text-primary/90 hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
           }
         >
           Borrow Summary
@@ -65,14 +65,18 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-[#0000] py-2 border-b border-gray-200 text-primary h-16">
+    <div className="bg-[#0000] py-2 border-b border-gray-200 font-primary">
       <div className="flex items-center justify-between w-[90%] mx-auto">
-        <Link to="/">
-          <div className="flex items-center">
-            <img src="" alt="logo" className="w-[120px] lg:w-[150px] " />
-            <h1 className="hidden lg:flex">Library Management</h1>
-          </div>
-        </Link>
+        <div className="">
+          <Link to="/" className="flex items-center space-x-2 gap-2">
+            <div className="mx-auto bg-primary  rounded-full flex items-center justify-center w-12 h-12">
+              <BookOpen className="w-8 h-8 text-white p-1" />
+            </div>
+            <h1 className="hidden lg:flex text-lg font-bold ">
+              Library Management
+            </h1>
+          </Link>
+        </div>
 
         {/* desktop navLink */}
         <div className="hidden lg:flex items-center space-x-10">

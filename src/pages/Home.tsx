@@ -4,7 +4,7 @@ import type { IBook } from "../types";
 const placeholderImg =
   "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80";
 
-const AllBooks = () => {
+const Home = () => {
   const { data, isLoading, isError } = useGetBooksQuery({});
   const books = data?.data || [];
 
@@ -115,4 +115,4 @@ const AllBooks = () => {
   );
 };
 
-export default AllBooks;
+export default Home;
