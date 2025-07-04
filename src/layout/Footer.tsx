@@ -10,7 +10,7 @@ const Footer = () => {
         {/* Center: Info */}
         <div className="text-sm opacity-90 text-center">
           <div>
-            &copy; {new Date().getFullYear()} Your Name. All rights reserved.
+            &copy; {new Date().getFullYear()} Library Management Team. All rights reserved.
           </div>
           <div>
             Built with <span className="font-semibold">React</span>, <span className="font-semibold">TypeScript</span>, <span className="font-semibold">Redux Toolkit</span>, and <span className="font-semibold">Tailwind CSS</span>.
