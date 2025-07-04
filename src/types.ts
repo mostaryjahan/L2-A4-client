@@ -9,8 +9,11 @@ export interface IBook {
   available: boolean;
 };
 
-// export interface IBorrow {
-//   book: Types.ObjectId;
-//   quantity: number;
-//   dueDate: Date;
-// }
+export interface IBorrow {
+  _id?: string;
+  book: string | IBook; 
+  quantity: number;      
+  dueDate: string;  
+  createdAt?: string;
+  updatedAt?: string;
+}

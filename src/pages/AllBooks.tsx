@@ -1,12 +1,35 @@
-import { useGetBooksQuery } from "../redux/api/baseApi";
+import { useNavigate } from "react-router";
+import { useDeleteBookMutation, useGetBooksQuery } from "../redux/api/baseApi";
 import type { IBook } from "../types";
-
-const placeholderImg =
-  "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80";
+import { Edit, Trash2 } from "lucide-react";
 
 const AllBooks = () => {
+   const navigate = useNavigate();
   const { data, isLoading, isError } = useGetBooksQuery({});
   const books = data?.data || [];
+   const [deleteBook] = useDeleteBookMutation();
+
+     const handleEdit = (id: string) => {
+    navigate(`/edit-book/${id}`);
+  };
+
+  const handleBorrow = (id: string) => {
+    navigate(`/borrow/${id}`);
+  };
+
+   const handleDelete = async (id: string) => {
+    const confirm = window.confirm("Are you sure you want to delete this book?");
+    if (confirm) {
+      try {
+        await deleteBook(id).unwrap();
+        alert("Book deleted successfully!");
+      } catch (err) {
+        alert("Failed to delete book.");
+        console.error("Delete book error:", err);
+      }
+    }
+  };
+
 
   if (isLoading) {
     return (
@@ -23,93 +46,62 @@ const AllBooks = () => {
   }
 
   return (
-    <div className="mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-8 text-center font-primary">
-        All Books
-      </h1>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-        {books && books.length > 0 ? (
-          books.map((book: IBook) => (
-            <div
-              key={book._id}
-              className="bg-white rounded-lg shadow-md overflow-hidden flex flex-col hover:shadow-lg transition p-4"
-            >
-              <div className="relative">
-                <img
-                  src={placeholderImg}
-                  alt={book.title}
-                  className="h-48 w-full object-cover"
-                  onError={(e) => {
-                    (e.target as HTMLImageElement).src = placeholderImg;
-                  }}
-                />
-                {/* Genre badge */}
-                <span
-                  className={`absolute top-2 right-2 text-white text-xs px-3 py-1 rounded-full shadow font-semibold ${
-                    book.genre === "FICTION"
-                      ? "bg-blue-600"
-                      : book.genre === "NON_FICTION"
-                      ? "bg-gray-700"
-                      : book.genre === "SCIENCE"
-                      ? "bg-green-600"
-                      : book.genre === "HISTORY"
-                      ? "bg-yellow-600"
-                      : book.genre === "BIOGRAPHY"
-                      ? "bg-pink-600"
-                      : book.genre === "FANTASY"
-                      ? "bg-purple-600"
-                      : "bg-purple-400"
-                  }`}
-                >
-                  {book.genre}
-                </span>
-              </div>
-              <div className="mt-2 flex-1 flex flex-col">
-                <h2 className="text-xl font-semibold mb-1 flex items-center gap-2 font-primary">
-                  {book.title
-                    ? book.title.length > 25
-                      ? `${book.title.slice(0, 25)}...`
-                      : book.title
-                    : ""}
-                </h2>
-                <p className="text-gray-600 mb-1">
-                  <span className="font-semibold text-base font-primary">
-                    Author:
-                  </span>{" "}
-                  {book.author}
-                </p>
-                <p className="text-gray-500 mb-1 text-base">
-                  <span className="font-semibold font-primary">ISBN:</span>{" "}
-                  {book.isbn}
-                </p>
-                <p className="text-gray-500 mb-2 text-sm font-primary line-clamp-2">
-                  {book.description}
-                </p>
-                <div className="flex justify-between items-center mt-auto">
-                  <span className="text-xs text-gray-500">
-                    Copies: {book.copies}
-                  </span>
-
-                  <span
-                    className={`ml-2 text-xs font-semibold ${
+    <div className="mx-auto max-w-6xl py-8 px-4">
+      <h1 className="text-3xl font-bold mb-6 text-center">All Books</h1>
+      <div className="overflow-x-auto rounded shadow">
+        <table className="min-w-full divide-y divide-gray-200 bg-white">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-4 py-3 text-left text-sm font-semibold">Title</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold">Author</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold">Genre</th>
+              <th className="px-4 py-3 text-left text-sm font-semibold">ISBN</th>
+              <th className="px-4 py-3 text-center text-sm font-semibold">Copies</th>
+              <th className="px-4 py-3 text-center text-sm font-semibold">Availability</th>
+              <th className="px-4 py-3 text-center text-sm font-semibold">Actions</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-100 text-sm">
+            {books.length > 0 ? (
+              books.map((book: IBook) => (
+                <tr key={book._id} className="hover:bg-gray-50 transition">
+                  <td className="px-4 py-2">{book.title}</td>
+                  <td className="px-4 py-2">{book.author}</td>
+                  <td className="px-4 py-2">{book.genre}</td>
+                  <td className="px-4 py-2">{book.isbn}</td>
+                  <td className="px-4 py-2 text-center">{book.copies}</td>
+                  <td
+                    className={`px-4 py-2 text-center font-medium ${
                       book.available && book.copies > 0
                         ? "text-green-600"
                         : "text-red-600"
                     }`}
                   >
-                    {book.available && book.copies > 0
-                      ? "Available"
-                      : "Unavailable"}
-                  </span>
-                </div>
-              </div>
-            </div>
-          ))
-        ) : (
-          <div className="col-span-full text-center text-gray-500">
-            No books found.
-          </div>
-        )}
+                    {book.available && book.copies > 0 ? "Available" : "Unavailable"}
+                  </td>
+                  <td className="px-4 py-2 text-center space-x-2">
+                    <button    onClick={() => handleEdit(book._id!)} className="text- px-2 py-1 rounded text-xs hover:text-gray-500">
+                      <Edit/>
+                    </button>
+                    <button    onClick={() => handleDelete(book._id!)} className="text-red-500 px-2 py-1 rounded hover:text-red-700">
+                      <Trash2/>
+                    </button>
+                    <button    onClick={() => handleBorrow(book._id!)} className="bg-blue-600 text-white px-2 py-1 rounded text-xs hover:bg-blue-700">
+                      
+                      Borrow
+                    </button>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan={7} className="px-4 py-6 text-center text-gray-500">
+                  No books found.
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );

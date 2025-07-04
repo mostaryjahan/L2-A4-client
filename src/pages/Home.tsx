@@ -5,7 +5,7 @@ const placeholderImg =
   "https://images.unsplash.com/photo-1512820790803-83ca734da794?auto=format&fit=crop&w=400&q=80";
 
 const Home = () => {
-  const { data, isLoading, isError } = useGetBooksQuery({});
+  const { data, isLoading, isError } = useGetBooksQuery({ limit: 50});
   const books = data?.data || [];
 
   if (isLoading) {
