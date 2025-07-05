@@ -1,69 +1,95 @@
-# React + TypeScript + Vite
+# 📚 Minimal Library Management System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### A clean and responsive library management system built using **React**, **Redux Toolkit Query**, **TypeScript**, **Node.js**, **Express**, and **MongoDB**.
 
-Currently, two official plugins are available:
+> ⚡ All features are public—no login required.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+ ###  🔗 Live Demo
+👉 **Client:** https://l2-a4-client.vercel.app </br>
+👉 **Server:** https://l2-a3-brown.vercel.app
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Features
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- 🔍 View All Books
+- ➕ Add Book
+- 📝 Edit Book
+- ❌ Delete Book
+- 📥 Borrow Book
+- 📊 Borrow Summary View
+- ✅ Real-time Updates via RTK Query
+- 🌐 Backend: Express + MongoDB
+- 💡 Toast Notifications with Sonner
+- 🎨 TailwindCSS UI (fully responsive)
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🧩 Tech Stack
+
+| Layer      | Tech                      |
+|------------|---------------------------|
+| Frontend   | React + TypeScript        |
+| API        | Redux Toolkit Query       |
+| Styling    | Tailwind CSS              |
+| Backend    | Node.js + Express.js      |
+| Database   | MongoDB (Mongoose)        |
+| Toast UI   | Sonner                    |
+
+---
+
+## 🔧 Installation
+
+```bash
+# Clone this repo
+git clone https://github.com/mostaryjahan/L2-A4-client.git
+cd L2-A4-client
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+# Install dependencies
+npm install
 ```
+
+
+### 🧪 Environment Variables
+
+Create a `.env` file in the root of your frontend project:
+
+```bash
+VITE_BASE_URL=https://l2-a3-brown.vercel.app
+```
+
+### 📦 You can also clone the backend server from here:  
+👉 [Backend Repo](https://github.com/mostaryjahan/L2-A3)
+
+
+
+## Start client
+```bash
+npm run dev
+```
+
+### Backend API Endpoints (Server)
+
+| Method | Endpoint            | Description           |
+| ------ | ------------------- | --------------------- |
+| GET    | /api/books          | Get all books         |
+| GET    | /api/books/\:id     | Get a single book     |
+| POST   | /api/books          | Add a new book        |
+| PATCH  | /api/books/\:id     | Update a book         |
+| DELETE | /api/books/\:id     | Delete a book         |
+| POST   | /api/borrow         | Borrow a book         |
+| GET    | /api/borrow/summary | Borrow summary report |
+
+
+---
+## Contact
+
+For any questions, feel free to reach out:
+
+* Name: Mostary Jahan
+* Email: [mostaryjahan01@email.com](mailto:mostaryjahan01@email.com)
+* GitHub: [Mostary Jahan](https://github.com/mostaryjahan)
+

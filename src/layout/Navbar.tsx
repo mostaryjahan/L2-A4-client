@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { BookOpen, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import logo from "../assets/logo.png"; 
+
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -25,12 +27,7 @@ const Navbar = () => {
       <li className="font-semibold">
         <NavLink
           to="/books"
-          onClick={handleNavClick}
-          className={({ isActive }) =>
-            isActive
-              ? "text-yellow-400 relative pb-1"
-              : "text-primary hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
-          }
+          
         >
           All Books
         </NavLink>
@@ -39,11 +36,7 @@ const Navbar = () => {
         <NavLink
           to="/create-book"
           onClick={handleNavClick}
-          className={({ isActive }) =>
-            isActive
-              ? "text-yellow-400 relative pb-1"
-              : "text-primary hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
-          }
+         
         >
           Add Book
         </NavLink>
@@ -52,11 +45,6 @@ const Navbar = () => {
         <NavLink
           to="/borrow-summary"
           onClick={handleNavClick}
-          className={({ isActive }) =>
-            isActive
-              ? "text-yellow-400 relative pb-1"
-              : "text-primary/90 hover:text-yellow-400 relative pb-1 after:content-[''] after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:bg-yellow-400 after:transition-all after:duration-300 after:ease-out after:w-0 hover:after:w-full after:-translate-x-1/2"
-          }
         >
           Borrow Summary
         </NavLink>
@@ -65,12 +53,12 @@ const Navbar = () => {
   );
 
   return (
-    <div className="bg-[#0000] py-2 border-b border-gray-200 font-primary">
-      <div className="flex items-center justify-between w-[90%] mx-auto">
+    <div className="bg-[#0000] py-2 border-b border-gray-100 font-primary">
+      <div className="flex items-center justify-between w-[95%] mx-auto">
         <div className="">
-          <Link to="/" className="flex items-center space-x-2 gap-2">
+          <Link to="/" className="flex items-center">
             <div className="mx-auto bg-primary  rounded-full flex items-center justify-center w-12 h-12">
-              <BookOpen className="w-8 h-8 text-white p-1" />
+             <img src={logo} alt="logo" />
             </div>
             <h1 className="hidden lg:flex text-lg font-bold ">
               Library Management
@@ -88,7 +76,7 @@ const Navbar = () => {
         {/* mobile navLink */}
         <div className="lg:hidden">
           <Menu
-            className="w-8 h-8 text-yellow-500 cursor-pointer"
+            className="w-8 h-8 text-blue-700 cursor-pointer"
             onClick={toggleMenu}
           />
         </div>
@@ -101,7 +89,7 @@ const Navbar = () => {
       >
         <div className="flex justify-end p-4">
           <X
-            className="w-8 h-8 text-yellow-500 cursor-pointer"
+            className="w-8 h-8 text-blue-700 cursor-pointer"
             onClick={toggleMenu}
           />
         </div>

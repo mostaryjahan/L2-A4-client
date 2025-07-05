@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { useGetBookByIdQuery, useUpdateBookMutation } from "../redux/api/baseApi";
+import {
+  useGetBookByIdQuery,
+  useUpdateBookMutation,
+} from "../redux/api/baseApi";
 import type { IBook } from "../types";
+import { toast } from "sonner";
 
 const EditBook = () => {
   const { id } = useParams<{ id: string }>();
@@ -26,50 +30,59 @@ const EditBook = () => {
     }
   }, [data]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-  const target = e.target;
-  const name = target.name;
+  const handleChange = (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const target = e.target;
+    const name = target.name;
 
-  let value: string | number | boolean;
+    let value: string | number | boolean;
 
-  if (target instanceof HTMLInputElement && target.type === "checkbox") {
-    value = target.checked;
-  } else if (target instanceof HTMLInputElement && target.type === "number") {
-    value = Number(target.value);
-  } else {
-    value = target.value;
-  }
+    if (target instanceof HTMLInputElement && target.type === "checkbox") {
+      value = target.checked;
+    } else if (target instanceof HTMLInputElement && target.type === "number") {
+      value = Number(target.value);
+    } else {
+      value = target.value;
+    }
 
-  setFormData((prev) => ({
-    ...prev,
-    [name]: value,
-  }));
-};
-
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
       await updateBook({ id: id!, ...formData }).unwrap();
-      alert("Book updated successfully!");
+      toast.success("Book updated successfully!");
       navigate("/books");
     } catch {
-      alert("Failed to update the book.");
+      toast.error("Failed to update the book.");
     }
   };
 
   if (isLoading) return <p>Loading book details...</p>;
-  if (isError) return <p className="text-red-600">Error loading book: {(error as any)?.data?.message || "Unknown error"}</p>;
-  
+  if (isError)
+    return (
+      <p className="text-red-600">
+        Error loading book: {(error as any)?.data?.message || "Unknown error"}
+      </p>
+    );
 
   return (
-    <div className="max-w-xl mx-auto p-6 bg-white rounded shadow mt-8">
+    <div className="max-w-xl mx-auto p-6 bg-blue-300 rounded shadow mt-8">
       <h1 className="text-2xl font-bold mb-6">Edit Book</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Title */}
         <div>
-          <label htmlFor="title" className="block font-medium mb-1">Title</label>
+          <label htmlFor="title" className="block font-medium mb-1">
+            Title
+          </label>
           <input
             id="title"
             name="title"
@@ -82,7 +95,9 @@ const EditBook = () => {
         </div>
         {/* Author */}
         <div>
-          <label htmlFor="author" className="block font-medium mb-1">Author</label>
+          <label htmlFor="author" className="block font-medium mb-1">
+            Author
+          </label>
           <input
             id="author"
             name="author"
@@ -95,7 +110,9 @@ const EditBook = () => {
         </div>
         {/* Genre */}
         <div>
-          <label htmlFor="genre" className="block font-medium mb-1">Genre</label>
+          <label htmlFor="genre" className="block font-medium mb-1">
+            Genre
+          </label>
           <select
             id="genre"
             name="genre"
@@ -115,7 +132,9 @@ const EditBook = () => {
         </div>
         {/* ISBN */}
         <div>
-          <label htmlFor="isbn" className="block font-medium mb-1">ISBN</label>
+          <label htmlFor="isbn" className="block font-medium mb-1">
+            ISBN
+          </label>
           <input
             id="isbn"
             name="isbn"
@@ -128,7 +147,9 @@ const EditBook = () => {
         </div>
         {/* Description */}
         <div>
-          <label htmlFor="description" className="block font-medium mb-1">Description</label>
+          <label htmlFor="description" className="block font-medium mb-1">
+            Description
+          </label>
           <textarea
             id="description"
             name="description"
@@ -140,7 +161,9 @@ const EditBook = () => {
         </div>
         {/* Copies */}
         <div>
-          <label htmlFor="copies" className="block font-medium mb-1">Copies</label>
+          <label htmlFor="copies" className="block font-medium mb-1">
+            Copies
+          </label>
           <input
             id="copies"
             name="copies"
@@ -162,7 +185,9 @@ const EditBook = () => {
             onChange={handleChange}
             className="h-4 w-4"
           />
-          <label htmlFor="available" className="font-medium">Available</label>
+          <label htmlFor="available" className="font-medium">
+            Available
+          </label>
         </div>
 
         <button

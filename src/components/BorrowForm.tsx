@@ -4,6 +4,7 @@ import {
   useBorrowBookMutation,
   useGetBookByIdQuery,
 } from "../redux/api/baseApi";
+import { toast } from "sonner";
 
 const BorrowForm = () => {
   const { bookId } = useParams();
@@ -30,10 +31,10 @@ const BorrowForm = () => {
         quantity,
         dueDate,
       }).unwrap();
-      alert("Borrowed successfully!");
+      toast.success("Book borrowed successfully!");
       navigate("/borrow-summary");
     } catch (err) {
-      alert("Borrow failed.");
+      toast.error("Failed to borrow book.");
       console.error("Borrow error:", err);
     }
   };
@@ -42,7 +43,7 @@ const BorrowForm = () => {
   if (isError || !book) return <p>Book not found.</p>;
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white p-6 rounded shadow">
+    <div className="max-w-md mx-auto mt-10 bg-blue-300 p-6 rounded shadow">
       <h1 className="text-2xl font-bold mb-4">Borrow: {book.title}</h1>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>

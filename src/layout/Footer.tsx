@@ -1,6 +1,6 @@
 const Footer = () => {
   return (
-    <footer className="w-full bg-gradient-to-r from-blue-600 to-purple-700 text-white py-8 mt-12">
+    <footer className="w-full bg-gray-800 text-white py-8 mt-12">
       <div className="max-w-5xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 gap-4">
         {/* Left: Logo & Name */}
         <div className="flex items-center gap-2">
@@ -22,7 +22,7 @@ const Footer = () => {
         {/* Right: Socials */}
         <div className="flex gap-4 mt-2 md:mt-0">
           <a
-            href="https://github.com/"
+            href="https://github.com/mostaryjahan"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-yellow-300 transition"

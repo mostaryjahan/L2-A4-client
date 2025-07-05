@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { useCreateBooksMutation } from "../redux/api/baseApi";
 import type { IBook } from "../types";
+import { toast } from "sonner";
 const initialForm: IBook = {
   title: "",
   author: "",
@@ -26,7 +27,9 @@ const AddBook = () => {
     useCreateBooksMutation();
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement  | HTMLSelectElement>
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
   ) => {
     const { name, value, type } = e.target;
     const checked = (e.target as HTMLInputElement).checked;
@@ -47,19 +50,18 @@ const AddBook = () => {
     try {
       await createBook(form).unwrap();
       setForm(initialForm);
+      toast.success("Book added successfully!");
     } catch (err) {
       console.log("Failed to add book:", err);
+      toast.error("Failed to add book.");
     }
   };
 
   return (
     <div className="max-w-xl mx-auto">
-      <div className="bg-white/80 backdrop-blur-sm rounded-xl shadow-xl border-0 overflow-hidden">
+      <div className="bg-blue-300 p-6 rounded-lg shadow-lg backdrop-blur-sm  border-0 overflow-hidden mt-6">
         {/* Header */}
         <div className="text-center pb-8 pt-8 px-8">
-          <div className="mx-auto w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center mb-4">
-            <BookOpen className="w-8 h-8 text-white" />
-          </div>
           <h1 className="text-3xl font-bold font-primary mb-2">Add New Book</h1>
           <p className="text-lg text-gray-600">
             Fill in the details to add a new book to your library
@@ -67,8 +69,8 @@ const AddBook = () => {
         </div>
 
         {/* Form Content */}
-        <div className="px-8 pb-8">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className=" pb-8">
+          <form onSubmit={handleSubmit} className="space-y-6 ">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
                 <label
@@ -222,7 +224,7 @@ const AddBook = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white rounded-lg transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full h-12 text-lg font-semibold bg-gradient-to-r from-blue-600 to-blue-900 hover:from-blue-700 hover:to-purple-700 text-white rounded-md transition-all duration-200 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
@@ -243,7 +245,10 @@ const AddBook = () => {
               )}
               {isError && (
                 <div className="text-red-600 mt-2">
-                  Failed to add book. {("data" in (error as { data?: { message?: string } }) ? (error as { data?: { message?: string } }).data?.message : "") || ""}
+                  Failed to add book.{" "}
+                  {("data" in (error as { data?: { message?: string } })
+                    ? (error as { data?: { message?: string } }).data?.message
+                    : "") || ""}
                 </div>
               )}
             </div>

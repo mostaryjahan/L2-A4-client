@@ -37,7 +37,7 @@ export const baseApi = createApi({
       }),
       invalidatesTags: ["book"],
     }),
-    // Borrow Endpoints
+    // Borrow api
     borrowBook: builder.mutation({
       query: (borrowData) => ({
         url: "/borrow",
@@ -47,7 +47,7 @@ export const baseApi = createApi({
       invalidatesTags: ["book", "borrow"],
     }),
     getBorrowSummary: builder.query({
-      query: () => "/borrow/summary",
+      query: () => "/borrow",
       providesTags: ["borrow"],
     }),
   }),
